@@ -1,0 +1,94 @@
+@model StudentManagementSystem.Models.Enrollment
+
+@{
+    ViewData["Title"] = "Enrollment Details";
+}
+
+<div class="container">
+    <h1 class="display-4">Enrollment Details</h1>
+    <hr />
+
+    <div class="card mb-4">
+        <div class="card-header bg-info text-white">
+            <h5 class="mb-0">Enrollment Information</h5>
+        </div>
+        <div class="card-body">
+            <dl class="row">
+                <dt class="col-sm-3">Student</dt>
+                <dd class="col-sm-9">
+                    <a asp-controller="Students" asp-action="Details" asp-route-id="@Model.StudentId">
+                        @Model.Student.FullName
+                    </a>
+                </dd>
+
+                <dt class="col-sm-3">Course</dt>
+                <dd class="col-sm-9">
+                    <a asp-controller="Courses" asp-action="Details" asp-route-id="@Model.CourseId">
+                        @Model.Course.Title (@Model.Course.CourseCode)
+                    </a>
+                </dd>
+
+                <dt class="col-sm-3">@Html.DisplayNameFor(model => model.Grade)</dt>
+                <dd class="col-sm-9">@(Model.Grade.HasValue ? Model.Grade.ToString() : "No grade")</dd>
+
+                <dt class="col-sm-3">@Html.DisplayNameFor(model => model.EnrollmentDate)</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.EnrollmentDate)</dd>
+            </dl>
+        </div>
+        <div class="card-footer">
+            <a asp-action="Edit" asp-route-id="@Model.EnrollmentId" class="btn btn-primary">Edit</a>
+            <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card mb-4">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">Student Information</h5>
+                </div>
+                <div class="card-body">
+                    <dl class="row">
+                        <dt class="col-sm-4">Name</dt>
+                        <dd class="col-sm-8">@Model.Student.FullName</dd>
+
+                        <dt class="col-sm-4">Email</dt>
+                        <dd class="col-sm-8">@Model.Student.Email</dd>
+
+                        <dt class="col-sm-4">Phone</dt>
+                        <dd class="col-sm-8">@Model.Student.PhoneNumber</dd>
+                    </dl>
+                </div>
+                <div class="card-footer">
+                    <a asp-controller="Students" asp-action="Details" asp-route-id="@Model.StudentId" class="btn btn-outline-primary">View Student</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header bg-success text-white">
+                    <h5 class="mb-0">Course Information</h5>
+                </div>
+                <div class="card-body">
+                    <dl class="row">
+                        <dt class="col-sm-4">Title</dt>
+                        <dd class="col-sm-8">@Model.Course.Title</dd>
+
+                        <dt class="col-sm-4">Code</dt>
+                        <dd class="col-sm-8">@Model.Course.CourseCode</dd>
+
+                        <dt class="col-sm-4">Credits</dt>
+                        <dd class="col-sm-8">@Model.Course.Credits</dd>
+
+                        <dt class="col-sm-4">Department</dt>
+                        <dd class="col-sm-8">@Model.Course.Department</dd>
+                    </dl>
+                </div>
+                <div class="card-footer">
+                    <a asp-controller="Courses" asp-action="Details" asp-route-id="@Model.CourseId" class="btn btn-outline-success">View Course</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

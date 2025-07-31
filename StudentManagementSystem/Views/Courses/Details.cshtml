@@ -1,0 +1,94 @@
+@model StudentManagementSystem.Models.Course
+
+@{
+    ViewData["Title"] = "Course Details";
+}
+
+<div class="container">
+    <h1 class="display-4">Course Details</h1>
+    <hr />
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card mb-4">
+                <div class="card-header bg-success text-white">
+                    <h5 class="mb-0">Course Information</h5>
+                </div>
+                <div class="card-body">
+                    <dl class="row">
+                        <dt class="col-sm-4">@Html.DisplayNameFor(model => model.Title)</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.Title)</dd>
+
+                        <dt class="col-sm-4">@Html.DisplayNameFor(model => model.CourseCode)</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.CourseCode)</dd>
+
+                        <dt class="col-sm-4">@Html.DisplayNameFor(model => model.Credits)</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.Credits)</dd>
+
+                        <dt class="col-sm-4">@Html.DisplayNameFor(model => model.Department)</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.Department)</dd>
+
+                        <dt class="col-sm-4">@Html.DisplayNameFor(model => model.Description)</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.Description)</dd>
+                    </dl>
+                </div>
+                <div class="card-footer">
+                    <a asp-action="Edit" asp-route-id="@Model.CourseId" class="btn btn-primary">Edit</a>
+                    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">Enrolled Students</h5>
+                </div>
+                <div class="card-body">
+                    @if (Model.Enrollments != null && Model.Enrollments.Any())
+                    {
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Student</th>
+                                    <th>Email</th>
+                                    <th>Grade</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var enrollment in Model.Enrollments)
+                                {
+                                    <tr>
+                                        <td>
+                                            <a asp-controller="Students" asp-action="Details" asp-route-id="@enrollment.StudentId">
+                                                @enrollment.Student.FullName
+                                            </a>
+                                        </td>
+                                        <td>@enrollment.Student.Email</td>
+                                        <td>@(enrollment.Grade.HasValue ? enrollment.Grade.ToString() : "No grade")</td>
+                                        <td>
+                                            <div class="btn-group" role="group">
+                                                <a asp-controller="Enrollments" asp-action="Edit" asp-route-id="@enrollment.EnrollmentId" class="btn btn-sm btn-outline-primary">Edit</a>
+                                                <a asp-controller="Enrollments" asp-action="Delete" asp-route-id="@enrollment.EnrollmentId" class="btn btn-sm btn-outline-danger">Delete</a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    }
+                    else
+                    {
+                        <div class="alert alert-info">
+                            No students are enrolled in this course yet.
+                        </div>
+                    }
+                </div>
+                <div class="card-footer">
+                    <a asp-controller="Enrollments" asp-action="Create" asp-route-courseId="@Model.CourseId" class="btn btn-primary">Add Student</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

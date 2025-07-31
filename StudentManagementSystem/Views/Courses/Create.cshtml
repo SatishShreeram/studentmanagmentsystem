@@ -1,0 +1,81 @@
+@model StudentManagementSystem.Models.Course
+
+@{
+    ViewData["Title"] = "Create Course";
+}
+
+<div class="container">
+    <h1 class="display-4">Create Course</h1>
+    <hr />
+    
+    <div class="row">
+        <div class="col-md-8">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                
+                <div class="form-group mb-3">
+                    <label asp-for="Title" class="control-label"></label>
+                    <input asp-for="Title" class="form-control" />
+                    <span asp-validation-for="Title" class="text-danger"></span>
+                </div>
+                
+                <div class="form-group mb-3">
+                    <label asp-for="CourseCode" class="control-label"></label>
+                    <input asp-for="CourseCode" class="form-control" />
+                    <span asp-validation-for="CourseCode" class="text-danger"></span>
+                </div>
+                
+                <div class="form-group mb-3">
+                    <label asp-for="Credits" class="control-label"></label>
+                    <input asp-for="Credits" class="form-control" type="number" min="1" max="6" />
+                    <span asp-validation-for="Credits" class="text-danger"></span>
+                </div>
+                
+                <div class="form-group mb-3">
+                    <label asp-for="Department" class="control-label"></label>
+                    <select asp-for="Department" class="form-control">
+                        <option value="">-- Select Department --</option>
+                        <option value="Computer Science">Computer Science</option>
+                        <option value="Mathematics">Mathematics</option>
+                        <option value="Physics">Physics</option>
+                        <option value="Chemistry">Chemistry</option>
+                        <option value="Biology">Biology</option>
+                        <option value="Engineering">Engineering</option>
+                        <option value="Business">Business</option>
+                        <option value="Arts">Arts</option>
+                        <option value="Humanities">Humanities</option>
+                    </select>
+                    <span asp-validation-for="Department" class="text-danger"></span>
+                </div>
+                
+                <div class="form-group mb-3">
+                    <label asp-for="Description" class="control-label"></label>
+                    <textarea asp-for="Description" class="form-control" rows="4"></textarea>
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+                
+                <div class="form-group mt-4">
+                    <button type="submit" class="btn btn-success">Create</button>
+                    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header bg-success text-white">
+                    <h5 class="mb-0">Course Information</h5>
+                </div>
+                <div class="card-body">
+                    <p>Please fill in all required fields.</p>
+                    <p><strong>Course Code:</strong> A unique identifier for the course (e.g., CS101).</p>
+                    <p><strong>Credits:</strong> The number of credit hours for the course (typically 1-6).</p>
+                    <p><strong>Description:</strong> A brief overview of what the course covers.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

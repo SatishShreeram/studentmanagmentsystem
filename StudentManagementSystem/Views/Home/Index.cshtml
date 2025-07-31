@@ -1,0 +1,139 @@
+﻿@model StudentManagementSystem.ViewModels.DashboardViewModel
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<div class="container">
+    <h1 class="display-4 mb-4">Student Management System Dashboard</h1>
+    
+    <!-- Summary Cards -->
+    <div class="row mb-4">
+        <div class="col-md-4">
+            <div class="card bg-primary text-white">
+                <div class="card-body">
+                    <h5 class="card-title">Total Students</h5>
+                    <p class="card-text display-4">@Model.TotalStudents</p>
+                    <a asp-controller="Students" asp-action="Index" class="btn btn-outline-light">View All</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card bg-success text-white">
+                <div class="card-body">
+                    <h5 class="card-title">Total Courses</h5>
+                    <p class="card-text display-4">@Model.TotalCourses</p>
+                    <a asp-controller="Courses" asp-action="Index" class="btn btn-outline-light">View All</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card bg-info text-white">
+                <div class="card-body">
+                    <h5 class="card-title">Total Enrollments</h5>
+                    <p class="card-text display-4">@Model.TotalEnrollments</p>
+                    <a asp-controller="Enrollments" asp-action="Index" class="btn btn-outline-light">View All</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Recent Students -->
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">Recently Enrolled Students</h5>
+                </div>
+                <div class="card-body">
+                    @if (Model.RecentStudents.Any())
+                    {
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Enrollment Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var student in Model.RecentStudents)
+                                {
+                                    <tr>
+                                        <td><a asp-controller="Students" asp-action="Details" asp-route-id="@student.StudentId">@student.FullName</a></td>
+                                        <td>@student.Email</td>
+                                        <td>@student.EnrollmentDate.ToShortDateString()</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    }
+                    else
+                    {
+                        <p class="text-muted">No students found.</p>
+                    }
+                </div>
+                <div class="card-footer">
+                    <a asp-controller="Students" asp-action="Create" class="btn btn-primary">Add New Student</a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Popular Courses -->
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header bg-success text-white">
+                    <h5 class="mb-0">Popular Courses</h5>
+                </div>
+                <div class="card-body">
+                    @if (Model.PopularCourses.Any())
+                    {
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Course</th>
+                                    <th>Code</th>
+                                    <th>Enrollments</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var course in Model.PopularCourses)
+                                {
+                                    <tr>
+                                        <td><a asp-controller="Courses" asp-action="Details" asp-route-id="@course.CourseId">@course.Title</a></td>
+                                        <td>@course.CourseCode</td>
+                                        <td>@course.EnrollmentCount</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    }
+                    else
+                    {
+                        <p class="text-muted">No courses found.</p>
+                    }
+                </div>
+                <div class="card-footer">
+                    <a asp-controller="Courses" asp-action="Create" class="btn btn-success">Add New Course</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Quick Actions -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header bg-dark text-white">
+                    <h5 class="mb-0">Quick Actions</h5>
+                </div>
+                <div class="card-body">
+                    <div class="d-flex justify-content-around">
+                        <a asp-controller="Students" asp-action="Create" class="btn btn-outline-primary">Add Student</a>
+                        <a asp-controller="Courses" asp-action="Create" class="btn btn-outline-success">Add Course</a>
+                        <a asp-controller="Enrollments" asp-action="Create" class="btn btn-outline-info">Create Enrollment</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

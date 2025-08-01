@@ -188,6 +188,9 @@ To run the application:
 The Student Management System provides a complete solution for managing students, courses, and enrollments in an educational institution.
 
 
+
+Task 1:
+
 1) CLone the repo
 2) in local sql server>  update the appsettings.json file with your local sqlserver name eg: LAPTOP-9GJQ6815\\SQLEXPRESS 
   "ConnectionStrings": {
@@ -219,3 +222,10 @@ The Student Management System provides a complete solution for managing students
 </configuration>
 
 11) browse and test the application.
+
+Task 2:
+
+1) Create a new azure VM 
+2) Istall IIS
+3) Install Sql server
+4) perform oprerations from Task 1

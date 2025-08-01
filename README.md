@@ -187,3 +187,35 @@ To run the application:
 
 The Student Management System provides a complete solution for managing students, courses, and enrollments in an educational institution.
 
+
+1) CLone the repo
+2) in local sql server>  update the appsettings.json file with your local sqlserver name eg: LAPTOP-9GJQ6815\\SQLEXPRESS 
+  "ConnectionStrings": {
+    "DefaultConnection": "Server=LAPTOP-9GJQ6815\\SQLEXPRESS;Database=StudentManagementDB;Trusted_Connection=True;TrustServerCertificate=True;MultipleActiveResultSets=true"
+  },
+3) dotnet tool install --global dotnet-ef --version 9.*
+4) dotnet ef database update  >> after completion verify in the sql whether db and the table have created
+5) dotnet run --project StudentManagementSystem >> http://localhost:5175
+6) dotnet publish
+7) goto iis create website and give the publish folder path of the artifact
+8) give permission to IIS App pool in the sql server
+9) iis folder permission for the publish forlder
+10) update web.config file with below code , first compare the file 
+
+    <?xml version="1.0" encoding="utf-8"?>
+<configuration>
+  <location path="." inheritInChildApplications="false">
+    <system.webServer>
+      <handlers>
+        <add name="aspNetCore" path="*" verb="*" modules="AspNetCoreModuleV2" resourceType="Unspecified" />
+      </handlers>
+      <aspNetCore processPath="dotnet" arguments=".\StudentManagementSystem.dll" stdoutLogEnabled="false" stdoutLogFile=".\logs\stdout" hostingModel="inprocess">
+        <environmentVariables>
+          <environmentVariable name="ASPNETCORE_ENVIRONMENT" value="Development" />
+        </environmentVariables>
+      </aspNetCore>
+    </system.webServer>
+  </location>
+</configuration>
+
+11) browse and test the application.

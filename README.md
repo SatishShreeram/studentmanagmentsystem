@@ -29,7 +29,8 @@ I've already updated the connection string in the `appsettings.json` file to use
 ```
 
 Replace:
-- `your-server-name` with your SQL Server name or IP address
+- `replace-server-name` with your SQL Server name or IP address
+<!-- if your creating the server with windows authentication method then username and password not required. -->
 - `your-username` with your SQL Server username
 - `your-password` with your SQL Server password
 
@@ -40,11 +41,18 @@ For Azure SQL Database, the server name will be something like: `yourservername.
 Once you've updated the connection string, you need to apply the migrations to create the database schema:
 
 1. Open a command prompt or terminal
-2. Navigate to the project directory: `cd c:/repos/cline/StudentManagementSystem`
+2. Navigate to the project directory: `cd C:\Users\<user_name>\Desktop\DevOps_Class\Project SQL\studentmanagmentsystem`
 3. Run the following command to apply the migrations:
 
+
+Installed the dotnet tool dotnet ef
 ```
-dotnet ef database update
+dotnet tool install --global dotnet-ef --version 9.*
+```
+
+now run the dotnet ef for the project 
+```
+dotnet ef database update --project studentmanagmentsystem
 ```
 
 This will create all the necessary tables in your external database and seed the initial data.
@@ -204,7 +212,7 @@ Task 1:
 8) give permission to IIS App pool in the sql server
 9) iis folder permission for the publish forlder
 10) update web.config file with below code , first compare the file 
-
+```
     <?xml version="1.0" encoding="utf-8"?>
 <configuration>
   <location path="." inheritInChildApplications="false">
@@ -220,6 +228,7 @@ Task 1:
     </system.webServer>
   </location>
 </configuration>
+```
 
 11) browse and test the application.
 

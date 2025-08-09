@@ -24,7 +24,7 @@ I've already updated the connection string in the `appsettings.json` file to use
 
 ```json
 "ConnectionStrings": {
-  "DefaultConnection": "Server=your-server-name;Database=StudentManagementDB;User Id=your-username;Password=your-password;TrustServerCertificate=True;MultipleActiveResultSets=true"
+  "DefaultConnection": "Server=DESKTOP-98OL0T9\\SQLEXPRESS;Database=StudentManagementDB;Trusted_Connection=True;TrustServerCertificate=True;MultipleActiveResultSets=true"
 }
 ```
 

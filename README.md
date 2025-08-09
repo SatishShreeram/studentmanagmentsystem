@@ -228,4 +228,12 @@ Task 2:
 1) Create a new azure VM 
 2) Istall IIS
 3) Install Sql server
-4) perform oprerations from Task 1
+4) perform oprerations from Task 
+
+
+-------------------
+my notes for reference
+server name: DESKTOP-98OL0T9\SQLEXPRESS
+
+webconfig
+<aspNetCore processPath="dotnet" arguments=".\StudentManagementSystem.dll" stdoutLogEnabled="true" stdoutLogFile=".\logs\stdout" hostingModel="inprocess" />
